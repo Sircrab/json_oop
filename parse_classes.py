@@ -1,87 +1,100 @@
-import copy
+PRIVATE_PREFIX = '$_'
+REFERENCE_PREFIX = 'ref_'
+INHERIT_KEYWORD = 'Inherits'
 
-PARENT_CLASS = "Inherits"
-FIXED_PROPERTY_PREFIX = "$_"
+def clean_prefix(root):
+    for key, value in root.items():
+        if(key.startswith(PRIVATE_PREFIX)):
+            del root[key]
+            key = key[len(PRIVATE_PREFIX):]
+            root[key] = value
+        if(type(value) is dict):
+            clean_prefix(value)
 
-def is_ignored_key(key):
-	for i, c in enumerate(FIXED_PROPERTY_PREFIX):
-		if (key[i] != c):
-			return False
-	return True
 
-def remove_prefix(v):
-	return v.replace(FIXED_PROPERTY_PREFIX, "")
+def parse(tree_root):
+    #Contains the result of parsing
+    output = {}
+    #Cache used for base classes, must NOT contain private properties (only inheritable ones)
+    cache = {}
+    tree_root = tree_root["classes"]
+    for class_key in tree_root:
+        output[class_key] = dict(solve_class(cache, tree_root[class_key], class_key, tree_root))
+    clean_prefix(output)
+    return output
 
-def get_object_parents(obj, class_list):
 
-	buffer_obj = copy.deepcopy(obj)
+def solve_inheritance(cache, parents, root):
+    output = {}
+    for class_key in parents:
+        solved_class = {}
+        if(class_key in cache):
+            solved_class = cache[class_key]
+        else:
+            solved_class = solve_class(cache, root[class_key], class_key, root)
+        for prop_key, prop_value in solved_class.items():
+            if(not prop_key.startswith(PRIVATE_PREFIX)):
+                output[prop_key] = prop_value
+    return output
 
-	for obj_key, obj_attr in obj.items():
 
-		if (obj_key == PARENT_CLASS):
-			for p_v in obj_attr:
-				if (p_v in class_list):
-					for c_key, c_attr in class_list[p_v].items():
-						if (type(c_attr) in [list, int, float]):
-							if (c_key in buffer_obj):
-								if (type(buffer_obj[c_key]) is str):
-									buffer_obj[c_key] = [buffer_obj[c_key]]
-								if (type(c_attr) is list):
-									sur_list = []
-									for s_p in c_attr:
-										if not (is_ignored_key(s_p)):
-											sur_list.append(s_p)
-								buffer_obj[c_key] = buffer_obj[c_key] + (c_attr if (type(c_attr) in [int, float]) else sur_list)
-							else:
-								if (type(c_attr) is list):
-									sur_list = []
-									for s_p in c_attr:
-										if (type(s_p) is str):
-											if not (is_ignored_key(s_p)):
-												sur_list.append(s_p)
-										if (type(s_p) is dict):
-											sur_list.append(s_p)
-								buffer_obj[c_key] = (c_attr if (type(c_attr) in [int, float]) else sur_list)
-						elif (type(c_attr) in [str]):
-							if not (c_key in buffer_obj):
-								if not (is_ignored_key(c_key)):
-									buffer_obj[c_key] = c_attr
-						elif (type(c_attr) in [dict]):
-							if not (is_ignored_key(c_key)):
-								buffer_obj[c_key] = get_object_parents(c_attr, class_list)
-		else:
-			if (type(obj_attr) is list):
-				if (len(obj_attr) > 0):
-					list_root = obj_attr[0]
-					if (type(list_root) is dict):
-						buffer_obj[obj_key] = []
-						for s_obj in obj_attr:
-							buffer_obj[obj_key].append(get_object_parents(s_obj, class_list))
-				else:
-					buffer_obj[obj_key] = []
-			elif (type(obj_attr) is dict):
-				buffer_obj[obj_key] = (get_object_parents(obj_attr, class_list))
+def solve_list(cache, list_def, root):
+    output = []
+    for value in list_def:
+        output.append(solve_value(cache, value, root))
+    return output
 
-	buffer_obj.pop(PARENT_CLASS, None)
-	return buffer_obj
 
-def main(classes):
-	class_list = {}
+def solve_dict(cache, dict_def, root):
+    output = {}
+    for key, value in dict_def.items():
+        output[key] = solve_value(cache, value, root)
+    return output
 
-	for key, v in classes.items():
-		class_list[key] = get_object_parents(v, class_list)
 
-	class_objs_clone = copy.deepcopy(class_list)
+def solve_str(cache, str_def, root):
+    if(str_def.startswith(REFERENCE_PREFIX)):
+        class_name = str_def[len(REFERENCE_PREFIX):]
+        if(class_name in cache):
+            return cache[class_name]
+        return solve_class(cache, root[class_name], class_name, root)
+    else:
+        return str_def
 
-	def normalize_output(obj, parent = None):
-		for key, attr in obj.items():
-			if (is_ignored_key(key)):
-				fixed_key = remove_prefix(key)
-				class_objs_clone[parent][fixed_key] = attr
-				class_objs_clone[parent].pop(key, None)
-			if isinstance(attr, dict):
-				normalize_output(attr, key)
 
-	normalize_output(class_list)
+def solve_value(cache, value, root):
+    if(type(value) is int or type(value) is float):
+        return value
+    if(type(value) is list):
+        return solve_list(cache, value, root)
+    if(type(value) is dict):
+        return solve_dict(cache, value, root)
+    if(type(value) is str):
+        return solve_str(cache, value, root)
+    raise Exception("Invalid type encountered while solving value " + str(value))
 
-	return class_objs_clone
+
+def solve_class(cache, class_def, class_key, root):
+    output = {}
+    local_cached_class = {}
+    if(class_key in cache):
+        return cache[class_key]
+    #Inheritance MUST be solved first (otherwise wonky shit happens)
+    if(INHERIT_KEYWORD in class_def):
+        new_props = solve_inheritance(cache, class_def[INHERIT_KEYWORD], root)
+        output = {**output, **new_props}
+        local_cached_class = output
+    for prop_key, prop_value in class_def.items():
+        private_prop = False
+        if(prop_key == INHERIT_KEYWORD):
+            continue
+        if(prop_key.startswith(PRIVATE_PREFIX)):
+            private_prop = True
+            #prop_key = prop_key[len(PRIVATE_PREFIX):]
+        output[prop_key] = solve_value(cache, prop_value, root)
+        if not private_prop:
+            local_cached_class[prop_key] = output[prop_key]
+        #We should reach this point, unsopported stuff here
+    cache[class_key] = local_cached_class
+    return output
+

@@ -80,8 +80,8 @@
 		"Class_StudentBackPack": {
 			"Inherits": ["Class_Backpack"],
 			"inventory": [
-				{ "Inherits": ["Class_Item_Masters_Degree"] },
-				{ "Inherits": ["Class_Message"] }
+                "ref_Class_Item_Masters_Degree",
+    			"ref_Class_Message"
 			]
 		},
 
