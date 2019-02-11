@@ -1,0 +1,94 @@
+{
+	"classes": {
+
+		"Class_Paper": {
+			"weight": 2,
+			"name": "Paper",
+			"texture": "paper"
+		},
+
+		"Class_Message": {
+			"Inherits": ["Class_Paper"],
+			"importance": 1,
+			"name": "Note from a friend"
+		},
+
+		"Class_Item_Diploma": {
+			"Inherits": ["Class_Paper"],
+			"importance": 50,
+			"name": "Diploma",
+			"description": "A paper to show you're moving on up."
+		},
+
+		"Class_Item_Bachelor_Degree": {
+			"Inherits": ["Class_Item_Diploma"],
+			"name": "A Bachelor's Disploma",
+			"importance": 100
+		},
+
+		"Class_Item_Masters_Degree": {
+			"Inherits": ["Class_Item_Diploma"],
+			"name": "A Master's Diploma",
+			"importance": 300
+		},
+
+		"Class_BodyPart": {
+			"blood": 50,
+			"texture": "flesh"
+		},
+
+		"Class_Arm": {
+			"Inherits": ["Class_BodyPart"],
+			"actions": ["grab", "punch"]
+		},
+
+		"Class_Leg": {
+			"Inherits": ["Class_BodyPart"],
+			"actions": ["kick", "run"]
+		},
+
+		"Class_LeftLeg": { "Inherits": ["Class_Leg"], "$_side": "left" },
+		"Class_RightLeg": { "Inherits": ["Class_Leg"], "$_side": "right" },
+
+		"Class_RightArm": { "Inherits": ["Class_Arm"], "$_side": "right" },
+		"Class_LeftArm": { "Inherits": ["Class_Arm"], "$_side": "left" },
+
+		"Class_Heart": {
+			"blood": 1000,
+			"sensitive": "yes"
+		},
+
+		"Class_BodyTorso": {
+			"Inherits": ["Class_Heart"]
+		},
+
+		"Class_Limbs": {
+			"Inherits": ["Class_LeftLeg", "Class_RightLeg", "Class_RightArm", "Class_LeftArm"]
+		},
+
+		"Class_HumanBeing": {
+			"name": "Genericus",
+			"description": "A regular person",
+			"Inherits": ["Class_BodyTorso", "Class_Limbs"]
+		},
+
+		"Class_Backpack": {
+			"inventory": [],
+			"weight": 50
+		},
+
+		"Class_StudentBackPack": {
+			"Inherits": ["Class_Backpack"],
+			"inventory": [
+				{ "Inherits": ["Class_Item_Masters_Degree"] },
+				{ "Inherits": ["Class_Message"] }
+			]
+		},
+
+		"Class_Student": {
+			"Inherits": ["Class_HumanBeing", "Class_StudentBackPack"],
+			"name": "Studentius Maximus"
+		}
+
+	}
+}
