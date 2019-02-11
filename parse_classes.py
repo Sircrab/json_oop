@@ -94,7 +94,7 @@ def solve_class(cache, class_def, class_key, root):
         output[prop_key] = solve_value(cache, prop_value, root)
         if not private_prop:
             local_cached_class[prop_key] = output[prop_key]
-        #We should reach this point, unsopported stuff here
+        #We shouldn't reach this point, unsopported stuff here
     cache[class_key] = local_cached_class
     return output
 
