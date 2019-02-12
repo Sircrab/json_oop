@@ -10,12 +10,16 @@ def clean_prefix(root):
             root[key] = value
         if(type(value) is dict):
             clean_prefix(value)
+        if(type(value) is list):
+            for list_val in value:
+                if(type(list_val) is dict):
+                    clean_prefix(list_val)
 
 
 def parse(tree_root):
     #Contains the result of parsing
     output = {}
-    #Cache used for base classes, must NOT contain private properties (only inheritable ones)
+    #Cache used for already solved classes
     cache = {}
     tree_root = tree_root["classes"]
     for class_key in tree_root:
@@ -71,30 +75,22 @@ def solve_value(cache, value, root):
         return solve_dict(cache, value, root)
     if(type(value) is str):
         return solve_str(cache, value, root)
+    # We shouldn't reach this point, unsopported stuff here
     raise Exception("Invalid type encountered while solving value " + str(value))
 
 
 def solve_class(cache, class_def, class_key, root):
     output = {}
-    local_cached_class = {}
     if(class_key in cache):
         return cache[class_key]
     #Inheritance MUST be solved first (otherwise wonky shit happens)
     if(INHERIT_KEYWORD in class_def):
         new_props = solve_inheritance(cache, class_def[INHERIT_KEYWORD], root)
         output = {**output, **new_props}
-        local_cached_class = output
     for prop_key, prop_value in class_def.items():
-        private_prop = False
         if(prop_key == INHERIT_KEYWORD):
             continue
-        if(prop_key.startswith(PRIVATE_PREFIX)):
-            private_prop = True
-            #prop_key = prop_key[len(PRIVATE_PREFIX):]
         output[prop_key] = solve_value(cache, prop_value, root)
-        if not private_prop:
-            local_cached_class[prop_key] = output[prop_key]
-        #We should reach this point, unsopported stuff here
-    cache[class_key] = local_cached_class
+    cache[class_key] = output
     return output
 

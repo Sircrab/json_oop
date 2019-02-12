@@ -54,39 +54,42 @@
 		"Class_LeftArm": { "Inherits": ["Class_Arm"], "$_side": "left" },
 
 		"Class_Heart": {
+			"Inherits": ["Class_BodyPart"],
 			"blood": 1000,
 			"sensitive": "yes"
 		},
 
 		"Class_BodyTorso": {
-			"Inherits": ["Class_Heart"]
+			"torso": ["ref_Class_Heart"]
 		},
 
 		"Class_Limbs": {
-			"Inherits": ["Class_LeftLeg", "Class_RightLeg", "Class_RightArm", "Class_LeftArm"]
+			"limbs": ["ref_Class_LeftLeg", "ref_Class_RightLeg", "ref_Class_RightArm", "ref_Class_LeftArm"]
 		},
 
 		"Class_HumanBeing": {
+			"body": ["ref_Class_BodyTorso", "ref_Class_Limbs"],
 			"name": "Genericus",
-			"description": "A regular person",
-			"Inherits": ["Class_BodyTorso", "Class_Limbs"]
+			"description": "A regular person"
 		},
 
 		"Class_Backpack": {
-			"inventory": [],
+			"name": "Backpack",
+			"contents": [],
 			"weight": 50
 		},
 
 		"Class_StudentBackPack": {
 			"Inherits": ["Class_Backpack"],
-			"inventory": [
+			"contents": [
                 "ref_Class_Item_Masters_Degree",
     			"ref_Class_Message"
 			]
 		},
 
 		"Class_Student": {
-			"Inherits": ["Class_HumanBeing", "Class_StudentBackPack"],
+			"Inherits": ["Class_HumanBeing"],
+			"inventory": ["ref_Class_StudentBackPack"],
 			"name": "Studentius Maximus"
 		}
 

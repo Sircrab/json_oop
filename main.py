@@ -10,7 +10,6 @@ def main():
     else:
         with open(sys.argv[1], encoding='utf-8-sig') as json_file:
             data = json.load(json_file)
-            print(data)
             res = parser.parse(data)
             output = open("output.json", "w")
             output.write(json.dumps(res, indent=2))
