@@ -1,299 +1,299 @@
 {
-  "Class_Item_Bachelor_Degree": {
-    "texture": "paper",
-    "importance": 100,
-    "name": "A Bachelor's Disploma",
-    "description": "A paper to show you're moving on up.",
-    "weight": 2
-  },
-  "Class_Item_Diploma": {
-    "texture": "paper",
-    "name": "Diploma",
-    "importance": 50,
-    "description": "A paper to show you're moving on up.",
-    "weight": 2
-  },
-  "Class_LeftLeg": {
+  "Class_RightArm": {
+    "side": "right",
     "blood": 50,
-    "actions": [
-      "kick",
-      "run"
-    ],
     "texture": "flesh",
-    "side": "left"
-  },
-  "Class_Arm": {
-    "blood": 50,
     "actions": [
       "grab",
       "punch"
+    ]
+  },
+  "Class_BodyTorso": {
+    "torso": [
+      {
+        "blood": 1000,
+        "sensitive": "yes",
+        "texture": "flesh"
+      }
+    ]
+  },
+  "Class_Paper": {
+    "weight": 2,
+    "name": "Paper",
+    "texture": "paper"
+  },
+  "Class_Student": {
+    "name": "Studentius Maximus",
+    "description": "A regular person",
+    "inventory": [
+      {
+        "weight": 50,
+        "name": "Backpack",
+        "contents": [
+          {
+            "weight": 2,
+            "name": "A Master's Diploma",
+            "description": "A paper to show you're moving on up.",
+            "importance": 300,
+            "texture": "paper"
+          },
+          {
+            "weight": 2,
+            "name": "Note from a friend",
+            "importance": 1,
+            "texture": "paper"
+          }
+        ]
+      }
     ],
-    "texture": "flesh"
+    "body": [
+      {
+        "torso": [
+          {
+            "blood": 1000,
+            "sensitive": "yes",
+            "texture": "flesh"
+          }
+        ]
+      },
+      {
+        "limbs": [
+          {
+            "side": "left",
+            "blood": 50,
+            "actions": [
+              "kick",
+              "run"
+            ],
+            "texture": "flesh"
+          },
+          {
+            "side": "right",
+            "blood": 50,
+            "actions": [
+              "kick",
+              "run"
+            ],
+            "texture": "flesh"
+          },
+          {
+            "side": "right",
+            "blood": 50,
+            "actions": [
+              "grab",
+              "punch"
+            ],
+            "texture": "flesh"
+          },
+          {
+            "side": "left",
+            "blood": 50,
+            "actions": [
+              "grab",
+              "punch"
+            ],
+            "texture": "flesh"
+          }
+        ]
+      }
+    ]
+  },
+  "Class_LeftArm": {
+    "side": "left",
+    "blood": 50,
+    "texture": "flesh",
+    "actions": [
+      "grab",
+      "punch"
+    ]
+  },
+  "Class_Item_Diploma": {
+    "weight": 2,
+    "name": "Diploma",
+    "description": "A paper to show you're moving on up.",
+    "importance": 50,
+    "texture": "paper"
+  },
+  "Class_Arm": {
+    "blood": 50,
+    "texture": "flesh",
+    "actions": [
+      "grab",
+      "punch"
+    ]
+  },
+  "Class_Backpack": {
+    "weight": 50,
+    "name": "Backpack",
+    "contents": []
+  },
+  "Class_Leg": {
+    "blood": 50,
+    "texture": "flesh",
+    "actions": [
+      "kick",
+      "run"
+    ]
+  },
+  "Class_HumanBeing": {
+    "name": "Genericus",
+    "description": "A regular person",
+    "body": [
+      {
+        "torso": [
+          {
+            "blood": 1000,
+            "sensitive": "yes",
+            "texture": "flesh"
+          }
+        ]
+      },
+      {
+        "limbs": [
+          {
+            "side": "left",
+            "blood": 50,
+            "actions": [
+              "kick",
+              "run"
+            ],
+            "texture": "flesh"
+          },
+          {
+            "side": "right",
+            "blood": 50,
+            "actions": [
+              "kick",
+              "run"
+            ],
+            "texture": "flesh"
+          },
+          {
+            "side": "right",
+            "blood": 50,
+            "actions": [
+              "grab",
+              "punch"
+            ],
+            "texture": "flesh"
+          },
+          {
+            "side": "left",
+            "blood": 50,
+            "actions": [
+              "grab",
+              "punch"
+            ],
+            "texture": "flesh"
+          }
+        ]
+      }
+    ]
+  },
+  "Class_Item_Masters_Degree": {
+    "weight": 2,
+    "name": "A Master's Diploma",
+    "description": "A paper to show you're moving on up.",
+    "importance": 300,
+    "texture": "paper"
   },
   "Class_BodyPart": {
     "blood": 50,
     "texture": "flesh"
   },
-  "Class_Leg": {
+  "Class_RightLeg": {
+    "side": "right",
     "blood": 50,
+    "texture": "flesh",
     "actions": [
       "kick",
       "run"
-    ],
-    "texture": "flesh"
+    ]
+  },
+  "Class_LeftLeg": {
+    "side": "left",
+    "blood": 50,
+    "texture": "flesh",
+    "actions": [
+      "kick",
+      "run"
+    ]
   },
   "Class_Heart": {
-    "sensitive": "yes",
     "blood": 1000,
-    "texture": "flesh"
-  },
-  "Class_Paper": {
-    "name": "Paper",
-    "texture": "paper",
-    "weight": 2
-  },
-  "Class_RightLeg": {
-    "blood": 50,
-    "actions": [
-      "kick",
-      "run"
-    ],
     "texture": "flesh",
-    "side": "right"
+    "sensitive": "yes"
   },
-  "Class_Student": {
-    "body": [
+  "Class_StudentBackPack": {
+    "weight": 50,
+    "name": "Backpack",
+    "contents": [
       {
-        "torso": [
-          {
-            "sensitive": "yes",
-            "blood": 1000,
-            "texture": "flesh"
-          }
-        ]
+        "weight": 2,
+        "name": "A Master's Diploma",
+        "description": "A paper to show you're moving on up.",
+        "importance": 300,
+        "texture": "paper"
       },
       {
-        "limbs": [
-          {
-            "blood": 50,
-            "actions": [
-              "kick",
-              "run"
-            ],
-            "texture": "flesh",
-            "side": "left"
-          },
-          {
-            "blood": 50,
-            "actions": [
-              "kick",
-              "run"
-            ],
-            "texture": "flesh",
-            "side": "right"
-          },
-          {
-            "blood": 50,
-            "actions": [
-              "grab",
-              "punch"
-            ],
-            "texture": "flesh",
-            "side": "right"
-          },
-          {
-            "blood": 50,
-            "actions": [
-              "grab",
-              "punch"
-            ],
-            "texture": "flesh",
-            "side": "left"
-          }
-        ]
-      }
-    ],
-    "name": "Studentius Maximus",
-    "description": "A regular person",
-    "inventory": [
-      {
-        "name": "Backpack",
-        "contents": [
-          {
-            "texture": "paper",
-            "importance": 300,
-            "description": "A paper to show you're moving on up.",
-            "name": "A Master's Diploma",
-            "weight": 2
-          },
-          {
-            "name": "Note from a friend",
-            "importance": 1,
-            "texture": "paper",
-            "weight": 2
-          }
-        ],
-        "weight": 50
+        "weight": 2,
+        "name": "Note from a friend",
+        "importance": 1,
+        "texture": "paper"
       }
     ]
-  },
-  "Class_Item_Masters_Degree": {
-    "texture": "paper",
-    "importance": 300,
-    "name": "A Master's Diploma",
-    "description": "A paper to show you're moving on up.",
-    "weight": 2
-  },
-  "Class_HumanBeing": {
-    "body": [
-      {
-        "torso": [
-          {
-            "sensitive": "yes",
-            "blood": 1000,
-            "texture": "flesh"
-          }
-        ]
-      },
-      {
-        "limbs": [
-          {
-            "blood": 50,
-            "actions": [
-              "kick",
-              "run"
-            ],
-            "texture": "flesh",
-            "side": "left"
-          },
-          {
-            "blood": 50,
-            "actions": [
-              "kick",
-              "run"
-            ],
-            "texture": "flesh",
-            "side": "right"
-          },
-          {
-            "blood": 50,
-            "actions": [
-              "grab",
-              "punch"
-            ],
-            "texture": "flesh",
-            "side": "right"
-          },
-          {
-            "blood": 50,
-            "actions": [
-              "grab",
-              "punch"
-            ],
-            "texture": "flesh",
-            "side": "left"
-          }
-        ]
-      }
-    ],
-    "name": "Genericus",
-    "description": "A regular person"
   },
   "Class_Message": {
+    "weight": 2,
     "name": "Note from a friend",
     "importance": 1,
-    "texture": "paper",
-    "weight": 2
-  },
-  "Class_Backpack": {
-    "name": "Backpack",
-    "contents": [],
-    "weight": 50
-  },
-  "Class_RightArm": {
-    "blood": 50,
-    "actions": [
-      "grab",
-      "punch"
-    ],
-    "texture": "flesh",
-    "side": "right"
-  },
-  "Class_BodyTorso": {
-    "torso": [
-      {
-        "sensitive": "yes",
-        "blood": 1000,
-        "texture": "flesh"
-      }
-    ]
+    "texture": "paper"
   },
   "Class_Limbs": {
     "limbs": [
       {
+        "side": "left",
         "blood": 50,
         "actions": [
           "kick",
           "run"
         ],
-        "texture": "flesh",
-        "side": "left"
+        "texture": "flesh"
       },
       {
+        "side": "right",
         "blood": 50,
         "actions": [
           "kick",
           "run"
         ],
-        "texture": "flesh",
-        "side": "right"
+        "texture": "flesh"
       },
       {
+        "side": "right",
         "blood": 50,
         "actions": [
           "grab",
           "punch"
         ],
-        "texture": "flesh",
-        "side": "right"
+        "texture": "flesh"
       },
       {
+        "side": "left",
         "blood": 50,
         "actions": [
           "grab",
           "punch"
         ],
-        "texture": "flesh",
-        "side": "left"
+        "texture": "flesh"
       }
     ]
   },
-  "Class_StudentBackPack": {
-    "name": "Backpack",
-    "contents": [
-      {
-        "texture": "paper",
-        "importance": 300,
-        "description": "A paper to show you're moving on up.",
-        "name": "A Master's Diploma",
-        "weight": 2
-      },
-      {
-        "name": "Note from a friend",
-        "importance": 1,
-        "texture": "paper",
-        "weight": 2
-      }
-    ],
-    "weight": 50
-  },
-  "Class_LeftArm": {
-    "blood": 50,
-    "actions": [
-      "grab",
-      "punch"
-    ],
-    "texture": "flesh",
-    "side": "left"
+  "Class_Item_Bachelor_Degree": {
+    "weight": 2,
+    "name": "A Bachelor's Disploma",
+    "description": "A paper to show you're moving on up.",
+    "importance": 100,
+    "texture": "paper"
   }
 }
