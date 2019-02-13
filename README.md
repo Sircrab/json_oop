@@ -14,7 +14,7 @@ Within the classes object each property will represent a class, the name of the 
 an object.
 
 ### Class Definition
-A class definition is an object which as properties can contain any value which JSON accepts, that is:
+A class definition is an object whose properties can contain any value which JSON accepts, that is:
 - Numbers
 - Strings
 - Lists
